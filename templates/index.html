@@ -9,7 +9,7 @@
 <body class="body">
     <header class="navbar">
         <div class="navbar__brand">
-            <img class="navbar__logo" src="/static/PIC.svg" style="width: 40px;" alt="logo"/>microblog 
+            <img class="navbar__logo" src="{{ url_for('static', filename='PIC.svg') }}" style="width: 40px;" alt="logo"/> microblog
         </div>
         <ul class="navbar__navigation">
             <li class="navbar__navigation--item"><a href="#" class="navbar__link"> recent </a></li>
@@ -91,3 +91,4 @@
 </body>
 
 </html>
+
