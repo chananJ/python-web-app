@@ -30,15 +30,20 @@
         <section>
             <h1  dir="rtl">השטויות שכתבת</h1>
 
-        {% for entry in entries %}
-            <article dir="rtl" class="entry" data-id="{{ loop.index }}">
-                <div><h2 class="entry__title">{{entry[0] |truncate(7,true)}}</h2>
-                <time class="entry__date" "23-10-2025">•{{entry[1]}} </time> 
-                </div>
-                <p class="entry__content">{{entry[0]}}</p>
-                <button onclick="hideEntry({{ loop.index }})" style="margin-top: 8px;">הסתר</button>
-            </article>
-        {% endfor%}
+ {% for entry in entries %}
+    <article dir="rtl" class="entry" data-id="{{ loop.index }}">
+        <div>
+            <h2 class="entry__title">{{ entry[0] | truncate(7, true) }}</h2>
+            <time class="entry__date">•{{ entry[1] }}</time>
+        </div>
+        <p class="entry__content">{{ entry[0] }}</p>
+        <button onclick="hideEntry({{ loop.index }})" style="margin-top: 8px;">הסתר</button>
+    </article>
+{% else %}
+    <p dir="rtl" style="margin-right: 20px;">לא כתבת עדיין כלום 🤷‍♂️</p>
+{% endfor %}
+            
+            
         </section>
     </main>
     <footer class="footer">
@@ -91,4 +96,5 @@
 </body>
 
 </html>
+
 
