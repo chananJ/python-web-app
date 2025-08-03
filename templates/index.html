@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="page-title">microblog</title>
+    <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body class="body">
+    <header class="navbar">
+        <div class="navbar__brand">
+            <img class="navbar__logo" src="/static/PIC.svg" style="width: 40px;" alt="logo"/>microblog 
+        </div>
+        <ul class="navbar__navigation">
+            <li class="navbar__navigation--item"><a href="#" class="navbar__link"> recent </a></li>
+            <li class="navbar__navigation--item"><a href="#" class="navbar__link"> calender </a></li>
+
+        </ul>
+    </header>
+    <main>
+        <section><h1 dir="rtl">כותרת 1</h1>
+            <form class="form"  method="POST">
+                <p class="form__input"></p>
+                <label for="entry" class="form__label">מה שבאלך   🚀 לראש</label>
+                <textarea name="content" id="entry" class="form__textarea"  required dir="rtl"></textarea>
+                <button type="submit" class="form__submit">תוסיף טקסט</button>
+            </form>
+            
+        </section>
+        <section>
+            <h1  dir="rtl">השטויות שכתבת</h1>
+
+        {% for entry in entries %}
+            <article dir="rtl" class="entry" data-id="{{ loop.index }}">
+                <div><h2 class="entry__title">{{entry[0] |truncate(7,true)}}</h2>
+                <time class="entry__date" "23-10-2025">•{{entry[1]}} </time> 
+                </div>
+                <p class="entry__content">{{entry[0]}}</p>
+                <button onclick="hideEntry({{ loop.index }})" style="margin-top: 8px;">הסתר</button>
+            </article>
+        {% endfor%}
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer_content">
+            <section class="left">
+                <div class="footer__column">
+                <a class="footer__item"> העמוד של חנן</a>
+                <a class="footer__item"> לעוד דברים נחמדים </a>
+                </div>
+
+            </section>  
+            <section class="right">
+                <div class="footer__column">
+                <a class="footer__item"> לאחרונה</a>
+                <a class="footer__item"> יומן </a>
+                </div>
+                
+            </section>
+                <div class="footer__column">
+                <a class="footer__item"> עליי</a>
+                <a class="footer__item"> עוד שטויות </a>
+                </div>
+        </div>
+
+    </footer>
+<script>
+    function hideEntry(id) {
+        const entry = document.querySelector(`[data-id='${id}']`);
+        if (entry) {
+            entry.style.display = "none";
+            let hidden = JSON.parse(localStorage.getItem("hiddenEntries") || "[]");
+            if (!hidden.includes(id)) {
+                hidden.push(id);
+                localStorage.setItem("hiddenEntries", JSON.stringify(hidden));
+            }
+        }
+    }
+
+    window.onload = function () {
+        let hidden = JSON.parse(localStorage.getItem("hiddenEntries") || "[]");
+        hidden.forEach(id => {
+            const entry = document.querySelector(`[data-id='${id}']`);
+            if (entry) {
+                entry.style.display = "none";
+            }
+        });
+    };
+</script>
+
+</body>
+</html>
