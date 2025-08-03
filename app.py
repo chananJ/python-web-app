@@ -30,10 +30,5 @@ def create_app():
 
 
 
-    app.db.entries.delete_many({
-        "$or": [
-            {"content": {"$exists": False}},
-            {"date": {"$exists": False}}
-        ]
-    })
+
     return app
